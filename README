@@ -1,0 +1,33 @@
+To Run:
+
+ruby sales_tax.rb <FILE_NAME1>
+
+For Help:
+
+ruby sales_tax.rb --help
+
+Assumptions:
+
+An item price must be greater than 0.
+An item count must be a whole number.
+An input price is for a single item, regardless of the item count.
+The line item format will not change. (COUNT_INTEGER + " " + INPUT_NAME_STRING + " at " + PRICE_FLOAT)
+The first line of Output 1 has a typo.   There should not be a space between the item and colon.
+Each input file contains 1 shopping cart.
+
+
+Explanation:
+
+A file is opened, and the ShoppingCart module:
+  1) Creates a new receipt. 
+  2) Processes each line to extract the appropriate parameters needed to create a new Item.
+  3) Appends a new Item to the receipt.
+  4) Prints the receipt when all lines have been processed.
+
+Upon instantiation, an Item object stores it's name, count, total, and tax values.  Exempt and Imported are subclasses of Item, and ImportedExempt is a subclass of Imported.  Imported overloads Item.name and all the Item subclasses overload Item.tax_rate.
+
+When an item is added to the receipt, the receipt's total & sales_tax values are incremented accordingly. 
+
+BigDecimal is used in the calculations to avoid rounding issues with Floats.  A custom BigDecimal method handles the rounding up of tax.
+
+Exempt items are detected by matching the item name to CSV lists of medical and food words.
